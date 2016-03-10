@@ -1,21 +1,42 @@
 ﻿@model IEnumerable<HomeworkWeek1.Models.客戶資料>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "客戶資料";
 }
 
 <h2>Index</h2>
 
 <p>
-	@Html.ActionLink("Create New", "Create")
+	@Html.ActionLink("新增", "Create")
 </p>
 @using (Html.BeginForm())
 {
-	<p>
+	@*<p>
 		客戶名稱: @Html.TextBox("customerName")
 		<br>
-		<input type="submit" value="查詢" />
-	</p>
+		<input type="submit" value="查詢"/>
+	</p>*@
+	<table>
+		<tr>
+			<td>
+				客戶名稱 @Html.TextBox("customerName")
+			</td>
+			<td>
+				統一編號 @Html.TextBox("uniNumber")
+			</td>
+		</tr>
+		<tr>
+			<td>
+				電話 @Html.TextBox("tel")
+			</td>
+			<td>
+				傳真 @Html.TextBox("fax")
+			</td>
+		</tr>
+		
+	</table>
+	<br>
+	<input type="submit" value="查詢" />
 }
 <table class="table">
     <tr>
