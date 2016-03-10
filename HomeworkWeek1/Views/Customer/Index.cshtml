@@ -7,8 +7,16 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+	@Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm())
+{
+	<p>
+		客戶名稱: @Html.TextBox("customerName")
+		<br>
+		<input type="submit" value="查詢" />
+	</p>
+}
 <table class="table">
     <tr>
         <th>
