@@ -9,34 +9,56 @@
 <p>
 	@Html.ActionLink("新增", "Create")
 </p>
+
 @using (Html.BeginForm())
 {
-	@*<p>
-		客戶名稱: @Html.TextBox("customerName")
+	<div>
+		<table>
+			<tr>
+				<td>
+					客戶名稱 
+				</td>
+				<td>@Html.TextBox("customerName")</td>
+				<td>
+					統一編號
+				</td>
+				<td>
+					@Html.TextBox("uniNumber")
+				</td>
+			</tr>
+			<tr>
+				<td>
+					電話
+				</td>
+				<td>
+					@Html.TextBox("tel")
+				</td>
+				<td>
+					傳真
+				</td>
+				<td>
+					@Html.TextBox("fax")
+				</td>
+			</tr>
+			<tr>
+				<td>
+					地址
+				</td>
+				<td>
+					@Html.TextBox("address")
+				</td>
+				<td>
+					Email
+				</td>
+				<td>
+					@Html.TextBox("email")
+				</td>
+			</tr>
+
+		</table>
 		<br>
-		<input type="submit" value="查詢"/>
-	</p>*@
-	<table>
-		<tr>
-			<td>
-				客戶名稱 @Html.TextBox("customerName")
-			</td>
-			<td>
-				統一編號 @Html.TextBox("uniNumber")
-			</td>
-		</tr>
-		<tr>
-			<td>
-				電話 @Html.TextBox("tel")
-			</td>
-			<td>
-				傳真 @Html.TextBox("fax")
-			</td>
-		</tr>
-		
-	</table>
-	<br>
-	<input type="submit" value="查詢" />
+		<input type="submit" value="查詢" />
+	</div>
 }
 <table class="table">
     <tr>

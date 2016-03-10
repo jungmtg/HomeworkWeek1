@@ -14,12 +14,7 @@ namespace HomeworkWeek1.Controllers
 	{
 		private 客戶資料Entities db = new 客戶資料Entities();
 
-		// GET: Customer
-		//public ActionResult Index()
-		//{
-		//    return View(db.客戶資料.Where(c=>c.是否已刪除== false).ToList());
-		//}
-		public ActionResult Index(string customerName, string uniNumber,string tel,string fax)
+		public ActionResult Index(string customerName, string uniNumber,string tel,string fax,string address,string email)
 		{
 			var result = db.客戶資料.Where(c => c.是否已刪除 == false);
 			if (!string.IsNullOrEmpty(customerName))
@@ -30,6 +25,10 @@ namespace HomeworkWeek1.Controllers
 				result = result.Where(c => c.電話 == tel);
 			if (!string.IsNullOrEmpty(fax))
 				result = result.Where(c => c.傳真 == fax);
+			if (!string.IsNullOrEmpty(address))
+				result = result.Where(c => c.地址 == address);
+			if (!string.IsNullOrEmpty(email))
+				result = result.Where(c => c.Email == email);
 			return View(result.ToList());
 		}
 
