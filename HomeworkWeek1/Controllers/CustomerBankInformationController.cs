@@ -17,7 +17,7 @@ namespace HomeworkWeek1.Controllers
         // GET: CustomerBankInformation
         public ActionResult Index()
         {
-            var 客戶銀行資訊 = db.客戶銀行資訊.Include(客 => 客.客戶資料);
+            var 客戶銀行資訊 = db.客戶銀行資訊.Where(cb=>cb.是否已刪除==false).Include(客 => 客.客戶資料);
             return View(客戶銀行資訊.ToList());
         }
 
@@ -115,8 +115,9 @@ namespace HomeworkWeek1.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             客戶銀行資訊 客戶銀行資訊 = db.客戶銀行資訊.Find(id);
-            db.客戶銀行資訊.Remove(客戶銀行資訊);
-            db.SaveChanges();
+	        客戶銀行資訊.是否已刪除 = true;
+			db.Entry(客戶銀行資訊).State = EntityState.Modified;
+			db.SaveChanges();
             return RedirectToAction("Index");
         }
 
