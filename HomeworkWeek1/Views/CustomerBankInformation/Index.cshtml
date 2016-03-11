@@ -7,8 +7,56 @@
 <h2>客戶銀行資訊</h2>
 
 <p>
-    @Html.ActionLink("新增", "Create")
+	@Html.ActionLink("新增", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+	<div>
+		<table>
+			<tr>
+				<td>
+					銀行名稱
+				</td>
+				<td>@Html.TextBox("bankname")</td>
+				<td>
+					銀行代碼
+				</td>
+				<td>
+					@Html.TextBox("bankno", ViewData.TemplateInfo.FormattedModelValue, new { type = "number" })
+				</td>
+			</tr>
+			<tr>
+
+				<td>
+					分行代碼
+				</td>
+				<td>
+					@Html.TextBox("branchno", ViewData.TemplateInfo.FormattedModelValue, new { type = "number" })
+				</td>
+				<td>
+					帳戶名稱
+				</td>
+				<td>
+					@Html.TextBox("accountname")
+				</td>
+			</tr>
+			<tr>
+
+				<td>
+					帳戶號碼
+				</td>
+				<td>
+					@Html.TextBox("accountno")
+				</td>
+			</tr>
+
+		</table>
+		<br>
+		<input type="submit" value="查詢" />
+	</div>
+}
+
 <table class="table">
     <tr>
         <th>

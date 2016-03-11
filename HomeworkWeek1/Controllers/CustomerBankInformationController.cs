@@ -14,12 +14,26 @@ namespace HomeworkWeek1.Controllers
     {
         private 客戶資料Entities db = new 客戶資料Entities();
 
-        // GET: CustomerBankInformation
-        public ActionResult Index()
-        {
-            var 客戶銀行資訊 = db.客戶銀行資訊.Where(cb=>cb.是否已刪除==false).Include(客 => 客.客戶資料);
-            return View(客戶銀行資訊.ToList());
-        }
+		
+		public ActionResult Index(string bankname,string bankno,string branchno,string accountname,string accountno)
+		{
+			var result = db.客戶銀行資訊.Where(cb => cb.是否已刪除 == false);
+			if(!string.IsNullOrEmpty(bankname))
+				result = result.Where(c => c.銀行名稱 == bankname);
+			if (!string.IsNullOrEmpty(bankno)) { 
+				var banknoval = Int32.Parse(bankno);
+				result = result.Where(c => c.銀行代碼 == banknoval);
+			}
+			if (!string.IsNullOrEmpty(branchno)) { 
+				var branchnoval = Int32.Parse(branchno);
+				result = result.Where(c => c.分行代碼 == branchnoval);
+			}
+			if (!string.IsNullOrEmpty(accountname))
+				result = result.Where(c => c.帳戶名稱 == accountname);
+			if (!string.IsNullOrEmpty(accountno))
+				result = result.Where(c => c.帳戶號碼 == accountno);
+			return View(result.ToList());
+		}
 
         // GET: CustomerBankInformation/Details/5
         public ActionResult Details(int? id)
