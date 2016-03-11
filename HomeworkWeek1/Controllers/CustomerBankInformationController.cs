@@ -52,7 +52,9 @@ namespace HomeworkWeek1.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.客戶銀行資訊.Add(客戶銀行資訊);
+	            客戶銀行資訊.是否已刪除 = false;
+
+				db.客戶銀行資訊.Add(客戶銀行資訊);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -86,7 +88,8 @@ namespace HomeworkWeek1.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(客戶銀行資訊).State = EntityState.Modified;
+				客戶銀行資訊.是否已刪除 = false;
+				db.Entry(客戶銀行資訊).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

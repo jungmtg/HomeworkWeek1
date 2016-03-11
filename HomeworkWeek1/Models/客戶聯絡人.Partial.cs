@@ -27,9 +27,11 @@ namespace HomeworkWeek1.Models
         [StringLength(250, ErrorMessage="欄位長度不得大於 250 個字元")]
         [Required]
         public string Email { get; set; }
-        
+
+
         [StringLength(50, ErrorMessage="欄位長度不得大於 50 個字元")]
-        public string 手機 { get; set; }
+		[RegularExpression(@"\d{4}-\d{6}", ErrorMessage = " 手機輸入格式錯誤,範例 0911-111111.")]
+		public string 手機 { get; set; }
         
         [StringLength(50, ErrorMessage="欄位長度不得大於 50 個字元")]
         public string 電話 { get; set; }

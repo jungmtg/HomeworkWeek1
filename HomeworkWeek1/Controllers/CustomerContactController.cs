@@ -50,9 +50,15 @@ namespace HomeworkWeek1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,客戶Id,職稱,姓名,Email,手機,電話")] 客戶聯絡人 客戶聯絡人)
         {
-            if (ModelState.IsValid)
+	        if (db.客戶聯絡人.Any(cc => cc.Email == 客戶聯絡人.Email))
+	        {
+				throw new Exception("同一個客戶下的聯絡人，其 Email 不能重複!!");
+	        }
+
+	        if (ModelState.IsValid)
             {
-                db.客戶聯絡人.Add(客戶聯絡人);
+	            客戶聯絡人.是否已刪除 = false;
+				db.客戶聯絡人.Add(客戶聯絡人);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -86,7 +92,8 @@ namespace HomeworkWeek1.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(客戶聯絡人).State = EntityState.Modified;
+				客戶聯絡人.是否已刪除 = false;
+				db.Entry(客戶聯絡人).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
