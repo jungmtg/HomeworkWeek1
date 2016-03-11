@@ -199,6 +199,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomerBankInformationController.cs" />
+    <Compile Include="Controllers\CustomerContactBankController.cs" />
     <Compile Include="Controllers\CustomerContactController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -367,6 +368,7 @@
     <Content Include="Views\CustomerBankInformation\Details.cshtml" />
     <Content Include="Views\CustomerBankInformation\Edit.cshtml" />
     <Content Include="Views\CustomerBankInformation\Index.cshtml" />
+    <Content Include="Views\CustomerContactBank\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

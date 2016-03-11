@@ -14,12 +14,27 @@ namespace HomeworkWeek1.Controllers
     {
         private 客戶資料Entities db = new 客戶資料Entities();
 
-        // GET: CustomerContact
-        public ActionResult Index()
-        {
-            var 客戶聯絡人 = db.客戶聯絡人.Include(客 => 客.客戶資料);
-            return View(客戶聯絡人.Where(c=>c.是否已刪除==false).ToList());
-        }
+		// GET: CustomerContact
+		//public ActionResult Index()
+		//{
+		//    var 客戶聯絡人 = db.客戶聯絡人.Include(客 => 客.客戶資料);
+		//    return View(客戶聯絡人.Where(c=>c.是否已刪除==false).ToList());
+		//}
+		public ActionResult Index(string jobdesc, string name,string email,string mobile,string telphone)
+		{
+			var result = db.客戶聯絡人.Where(c => c.是否已刪除 == false);
+			if (!string.IsNullOrEmpty(jobdesc))
+				result = result.Where(c => c.職稱 == jobdesc);
+			if (!string.IsNullOrEmpty(name))
+				result = result.Where(c => c.姓名 == name);
+			if (!string.IsNullOrEmpty(email))
+				result = result.Where(c => c.Email == email);
+			if (!string.IsNullOrEmpty(mobile))
+				result = result.Where(c => c.手機 == mobile);
+			if (!string.IsNullOrEmpty(telphone))
+				result = result.Where(c => c.電話 == telphone);
+			return View(result.ToList());
+		}
 
         // GET: CustomerContact/Details/5
         public ActionResult Details(int? id)
