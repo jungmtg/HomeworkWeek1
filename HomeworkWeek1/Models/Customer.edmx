@@ -54,6 +54,16 @@
           <Property Name="電話" Type="nvarchar" MaxLength="50" />
           <Property Name="是否已刪除" Type="bit" />
         </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'C:\USERS\JASONFANG\DOCUMENTS\VISUAL STUDIO 2015\PROJECTS\HOMEWORKWEEK1\HOMEWORKWEEK1\APP_DATA\客戶資料.MDF.dbo.客戶名稱聯絡人數量銀行帳戶數量' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="客戶名稱聯絡人數量銀行帳戶數量">
+          <Key>
+            <PropertyRef Name="客戶名稱" />
+          </Key>
+          <Property Name="客戶名稱" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="聯絡人數量" Type="int" />
+          <Property Name="銀行帳戶數量" Type="int" />
+        </EntityType>
         <Association Name="FK_客戶銀行資訊_客戶資料">
           <End Role="客戶資料" Type="Self.客戶資料" Multiplicity="1" />
           <End Role="客戶銀行資訊" Type="Self.客戶銀行資訊" Multiplicity="*" />
@@ -114,6 +124,13 @@
           <EntitySet Name="客戶資料" EntityType="Self.客戶資料" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="客戶銀行資訊" EntityType="Self.客戶銀行資訊" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="客戶聯絡人" EntityType="Self.客戶聯絡人" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="客戶名稱聯絡人數量銀行帳戶數量" EntityType="Self.客戶名稱聯絡人數量銀行帳戶數量" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [客戶名稱聯絡人數量銀行帳戶數量].[客戶名稱] AS [客戶名稱], 
+    [客戶名稱聯絡人數量銀行帳戶數量].[聯絡人數量] AS [聯絡人數量], 
+    [客戶名稱聯絡人數量銀行帳戶數量].[銀行帳戶數量] AS [銀行帳戶數量]
+    FROM [dbo].[客戶名稱聯絡人數量銀行帳戶數量] AS [客戶名稱聯絡人數量銀行帳戶數量]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_客戶銀行資訊_客戶資料" Association="Self.FK_客戶銀行資訊_客戶資料">
             <End Role="客戶資料" EntitySet="客戶資料" />
             <End Role="客戶銀行資訊" EntitySet="客戶銀行資訊" />
@@ -247,6 +264,7 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="客戶名稱聯絡人數量銀行帳戶數量" EntityType="客戶資料Model.客戶名稱聯絡人數量銀行帳戶數量" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -259,6 +277,14 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="客戶名稱聯絡人數量銀行帳戶數量">
+          <Key>
+            <PropertyRef Name="客戶名稱" />
+          </Key>
+          <Property Name="客戶名稱" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="聯絡人數量" Type="Int32" />
+          <Property Name="銀行帳戶數量" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -342,6 +368,15 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="客戶資料Model.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="客戶資料Model.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="客戶名稱聯絡人數量銀行帳戶數量">
+            <EntityTypeMapping TypeName="客戶資料Model.客戶名稱聯絡人數量銀行帳戶數量">
+              <MappingFragment StoreEntitySet="客戶名稱聯絡人數量銀行帳戶數量">
+                <ScalarProperty Name="銀行帳戶數量" ColumnName="銀行帳戶數量" />
+                <ScalarProperty Name="聯絡人數量" ColumnName="聯絡人數量" />
+                <ScalarProperty Name="客戶名稱" ColumnName="客戶名稱" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
