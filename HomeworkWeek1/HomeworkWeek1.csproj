@@ -251,6 +251,9 @@
     <Compile Include="Models\客戶名稱聯絡人數量銀行帳戶數量.cs">
       <DependentUpon>Customer.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\客戶名稱聯絡人數量銀行帳戶數量.Partial.cs">
+      <DependentUpon>EFGeneratePartialClass.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\客戶聯絡人.cs">
       <DependentUpon>Customer.tt</DependentUpon>
     </Compile>

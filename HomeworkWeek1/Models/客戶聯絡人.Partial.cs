@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace HomeworkWeek1.Models
 {
     using System;
@@ -5,8 +7,32 @@ namespace HomeworkWeek1.Models
     using System.ComponentModel.DataAnnotations;
     
     [MetadataType(typeof(客戶聯絡人MetaData))]
-    public partial class 客戶聯絡人
+    public partial class 客戶聯絡人 : IValidatableObject
     {
+	    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+	    {
+			客戶資料Entities db = new 客戶資料Entities();
+			if (this.Id == 0)
+		    {
+				//create
+				if (db.客戶聯絡人.Any(cc => cc.Email == this.Email ))
+				//.Any(cc => cc.Email == this.Email && cc.客戶Id = this.客戶Id))
+				{
+					yield return new ValidationResult("同一個客戶下的聯絡人，其 Email 不能重複!!");
+
+				}
+			}
+		    else
+		    {
+				//update
+				//this.客戶Id
+				if (db.客戶聯絡人.Any(cc=>cc.Email == this.Email && cc.客戶Id == this.客戶Id))
+					//.Any(cc => cc.Email == this.Email && cc.客戶Id = this.客戶Id))
+			    {
+					yield return new ValidationResult("同一個客戶下的聯絡人，其 Email 不能重複!!");
+				}
+		    }
+	    }
     }
     
     public partial class 客戶聯絡人MetaData
