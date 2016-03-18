@@ -26,7 +26,7 @@ namespace HomeworkWeek1.Models
 		    {
 				//update
 				//this.客戶Id
-				if (db.客戶聯絡人.Any(cc=>cc.Email == this.Email && cc.客戶Id == this.客戶Id))
+				if (db.客戶聯絡人.Any(cc=>cc.Email == this.Email && cc.客戶Id == this.客戶Id && cc.Id!=this.Id))
 					//.Any(cc => cc.Email == this.Email && cc.客戶Id = this.客戶Id))
 			    {
 					yield return new ValidationResult("同一個客戶下的聯絡人，其 Email 不能重複!!");
